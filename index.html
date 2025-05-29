@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Produits AliExpress | Meilleurs Articles Tendances</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4747;
+            --primary-dark: #e63e3e;
+            --secondary: #0e0e0f;
+            --light: #f7f7f7;
+            --dark: #222325;
+            --gray: #74767e;
+            --light-gray: #efeff0;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: titleAnimation 3s infinite alternate;
+        }
+
+        @keyframes titleAnimation {
+            0% {
+                transform: translateY(0) scale(1);
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+            100% {
+                transform: translateY(-5px) scale(1.02);
+                text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: white;
+            border-radius: 2px;
+            animation: linePulse 2s infinite;
+        }
+
+        @keyframes linePulse {
+            0% { width: 80px; opacity: 1; }
+            50% { width: 100px; opacity: 0.8; }
+            100% { width: 80px; opacity: 1; }
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            transform: translateY(0);
+            opacity: 0;
+            animation: cardEntrance 0.6s ease-out forwards;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.05);
+        }
+
+        .service-image-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .service-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .service-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .service-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .service-btn i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .service-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animation delays for cards */
+        .service-card:nth-child(1) { animation-delay: 0.01s; }
+        .service-card:nth-child(2) { animation-delay: 0.02s; }
+        .service-card:nth-child(3) { animation-delay: 0.03s; }
+        .service-card:nth-child(4) { animation-delay: 0.04s; }
+        .service-card:nth-child(5) { animation-delay: 0.05s; }
+        .service-card:nth-child(6) { animation-delay: 0.06s; }
+        .service-card:nth-child(7) { animation-delay: 0.07s; }
+        .service-card:nth-child(8) { animation-delay: 0.08s; }
+        .service-card:nth-child(9) { animation-delay: 0.09s; }
+        .service-card:nth-child(10) { animation-delay: 01.0s; }
+        .service-card:nth-child(11) { animation-delay: 01.1s; }
+        .service-card:nth-child(12) { animation-delay: 01.2s; }
+        .service-card:nth-child(13) { animation-delay: 01.3s; }
+        .service-card:nth-child(14) { animation-delay: 01.4s; }
+        .service-card:nth-child(15) { animation-delay: 01.5s; }
+        .service-card:nth-child(16) { animation-delay: 01.6s; }
+        .service-card:nth-child(17) { animation-delay: 01.7s; }
+        .service-card:nth-child(18) { animation-delay: 01.8s; }
+        .service-card:nth-child(19) { animation-delay: 01.9s; }
+        .service-card:nth-child(20) { animation-delay: 02.0s; }
+
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Floating animation for visual interest */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Animated background for header */
+        .animated-bg {
+    background: linear-gradient(-45deg, rgba(26, 159, 140, 0.7), rgba(26, 143, 159, 0.7), rgba(26, 127, 175, 0.7), rgba(26, 111, 191, 0.7));
+    background-size: 400% 400%;
+    padding: 6rem 0;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    animation: gradientBG 15s ease infinite;
+}
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animated-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') center/cover;
+    opacity: 0.5; /* Changé de 0.15 à 0.08 pour une image plus claire */
+    mix-blend-mode: overlay;
+}
+
+        .animated-bg-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Floating particles effect */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+    position: absolute;
+    background: rgba(173, 216, 230, 0.6); /* Bleu clair au lieu de blanc */
+    border-radius: 50%;
+    animation: floatParticle linear infinite;
+}
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="particles" id="particles"></div>
+        <div class="container animated-bg-content">
+            <header>
+                <h1>Top Produits AliExpress</h1>
+                <p class="subtitle">Découvrez les produits tendance les plus populaires à petits prix pour améliorer votre quotidien.</p>
+            </header>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="services-grid">
+            <!-- Produit 1 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1232&q=80" alt="Écouteurs Bluetooth sans fil" class="service-image">
+                    <span class="service-category">Électronique</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Écouteurs Bluetooth sans fil</h3>
+                    <p class="service-description">Son stéréo, design compact, parfaits pour le sport et les déplacements. Sans fil, autonomie longue, compatible Android/iOS.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 2 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Chargeur rapide USB-C" class="service-image">
+                    <span class="service-category">Électronique</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Chargeur rapide USB-C</h3>
+                    <p class="service-description">Recharge ultra-rapide pour tous tes appareils modernes. Gain de temps, sécurité intégrée, multi-appareils.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 3 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1601784551446-66c9e1e9b189?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Support de téléphone pour voiture" class="service-image">
+                    <span class="service-category">Auto</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Support de téléphone pour voiture</h3>
+                    <p class="service-description">Stable et rotatif, parfait pour GPS et appels. Sécurité au volant, installation facile, universel.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 4 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1584473457409-ceb3f1c9a0f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Ruban LED multicolore" class="service-image">
+                    <span class="service-category">Maison</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Ruban LED multicolore</h3>
+                    <p class="service-description">Illumine ta chambre ou ton setup gaming avec style. Télécommande, ambiance personnalisée, facile à poser.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 5 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1600267165477-3261a9d8c421?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Brosse de nettoyage multifonction" class="service-image">
+                    <span class="service-category">Maison</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Brosse de nettoyage multifonction</h3>
+                    <p class="service-description">Brosse tout-en-un pour éviers, murs, carreaux. Poignée ergonomique, gain de temps, efficace.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 6 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1601760561441-16420502c7e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Organisateur de tiroir/cuisine" class="service-image">
+                    <span class="service-category">Cuisine</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Organisateur de tiroir/cuisine</h3>
+                    <p class="service-description">Optimise chaque centimètre de ton espace de rangement. Modulaire, esthétique, anti-bazar.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 7 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1564510015443-605afdb7dcbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Filtre de robinet" class="service-image">
+                    <span class="service-category">Maison</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Filtre de robinet</h3>
+                    <p class="service-description">Eau plus propre et meilleure au goût. Anti-calcaire, facile à installer, économique.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 8 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1571805618149-3a9a5af7c1a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Boîte à lunch isotherme" class="service-image">
+                    <span class="service-category">Cuisine</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Boîte à lunch isotherme</h3>
+                    <p class="service-description">Garde tes repas chauds ou frais toute la journée. Design hermétique, durable, parfait pour l'école ou le travail.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 9 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1180&q=80" alt="Montre connectée pas chère" class="service-image">
+                    <span class="service-category">Mode</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Montre connectée pas chère</h3>
+                    <p class="service-description">Suivi du sommeil, activité, notifications. Santé, style, batterie longue durée.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 10 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80" alt="Lunettes de soleil polarisées" class="service-image">
+                    <span class="service-category">Mode</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Lunettes de soleil polarisées</h3>
+                    <p class="service-description">Protection UV avec un look tendance. Anti-reflets, confort visuel, légères.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 11 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1588854337236-6889d631faa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Chaussettes invisibles/sport" class="service-image">
+                    <span class="service-category">Mode</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Chaussettes invisibles/sport</h3>
+                    <p class="service-description">Confort maximal au quotidien. Respirantes, anti-dérapantes, durables.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 12 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="T-shirts oversize/unisexes tendance" class="service-image">
+                    <span class="service-category">Mode</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">T-shirts oversize/unisexes tendance</h3>
+                    <p class="service-description">Parfaits pour un look streetwear décontracté. Coton doux, impression originale, style viral.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 13 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Bouteille à infusion d'eau" class="service-image">
+                    <span class="service-category">Bien-être</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Bouteille à infusion d'eau</h3>
+                    <p class="service-description">Infuse fruits ou herbes pour boire plus sainement. Hydratation fun, réutilisable, sans BPA.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 14 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Mini ventilateur USB portable" class="service-image">
+                    <span class="service-category">Lifestyle</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Mini ventilateur USB portable</h3>
+                    <p class="service-description">Fraîcheur immédiate partout. Léger, silencieux, idéal pour l'été.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 15 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1591348122449-02525d703f45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Pistolet de massage musculaire" class="service-image">
+                    <span class="service-category">Bien-être</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Pistolet de massage musculaire</h3>
+                    <p class="service-description">Détend tes muscles après le sport ou le travail. Plusieurs vitesses, rechargeable, soulagement rapide.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 16 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1128&q=80" alt="Masque facial en silicone réutilisable" class="service-image">
+                    <span class="service-category">Beauté</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Masque facial en silicone réutilisable</h3>
+                    <p class="service-description">Optimise tes soins beauté maison. Écologique, adaptable, effet spa.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 17 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1594782910209-ec0a9b820f9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Jouets Montessori en bois" class="service-image">
+                    <span class="service-category">Enfants</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Jouets Montessori en bois</h3>
+                    <p class="service-description">Apprentissage ludique pour les tout-petits. Sécurisés, durables, développent l'intelligence.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 18 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1130&q=80" alt="Thermomètre sans contact" class="service-image">
+                    <span class="service-category">Santé</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Thermomètre sans contact</h3>
+                    <p class="service-description">Précis et hygiénique, même pour les bébés. Lecture rapide, écran rétroéclairé, sans douleur.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 19 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Lumières LED pour vélo/trottinette" class="service-image">
+                    <span class="service-category">Sport</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Lumières LED pour vélo/trottinette</h3>
+                    <p class="service-description">Rends-toi visible et stylé de nuit. Rechargeables, étanches, sécurité renforcée.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Produit 20 -->
+            <div class="service-card floating">
+                <div class="service-image-container">
+                    <img src="https://images.unsplash.com/photo-1591360236480-4ed861025fa1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Sacoche de sport / banane imperméable" class="service-image">
+                    <span class="service-category">Sport</span>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Sacoche de sport / banane imperméable</h3>
+                    <p class="service-description">Garde ton téléphone, clés et cash en sécurité. Léger, anti-transpiration, pour running ou voyage.</p>
+                    <a href="#" class="service-btn">Voir le produit <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 Top Produits AliExpress. Tous droits réservés.</p>
+            <p>Découvrez les meilleurs produits à petits prix pour améliorer votre quotidien.</p>
+        </div>
+    </footer>
+<script>
+        // Additional animations on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.service-card');
+            
+            // Create particles for animated background
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2px and 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation duration between 10s and 20s
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Animate cards on scroll
+            const animateOnScroll = function() {
+                cards.forEach((card, index) => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (cardPosition < screenPosition) {
+                        card.style.animation = `cardEntrance 0.6s ease-out ${index * 0.1}s forwards`;
+                    }
+                });
+            };
+            
+            // Initial check
+            animateOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Add hover effect to all cards
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.05)';
+                });
+            });
+        });
+
+        // Add floating animation to random elements
+        function addFloatingAnimation() {
+            const elements = document.querySelectorAll('.floating');
+            elements.forEach(el => {
+                // Random delay between 0s and 2s
+                const delay = Math.random() * 2;
+                el.style.animationDelay = `${delay}s`;
+                
+                // Random duration between 4s and 8s
+                const duration = Math.random() * 4 + 4;
+                el.style.animationDuration = `${duration}s`;
+            });
+        }
+
+        // Call the function when DOM is loaded
+        document.addEventListener('DOMContentLoaded', addFloatingAnimation);
+    </script>
+    </body>
+</html>
